@@ -13,7 +13,9 @@
 //     { firstName: 'Karlach', lastName: 'Cliffgate', location: 'Avernus' }
 //   ]);
 //   => ['Gale Dekarios', 'Wyll Ravengard', 'Karlach Cliffgate'];
-function getNames(people) {}
+function getNames(people) {
+  return people.map((person) => `${person.firstName} ${person.lastName}`)
+}
 
 // Given an object representing a person, return their full name (first name and last name).
 // You MUST use object destructuring in your solution.
@@ -24,7 +26,11 @@ function getNames(people) {}
 // Ex.:
 //   getName({ firstName: 'Gale', lastName: 'Dekarios', location: 'Waterdeep' });
 //   => 'Gale Dekarios'
-function getNameUsingDestructuring(person) {}
+function getNameUsingDestructuring(person) {
+  const {firstName, lastName} = person
+  
+  return `${firstName} ${lastName}`
+}
 
 // Given an array of objects representing people, return a new array of the
 // people matching the given location.
@@ -43,7 +49,16 @@ function getNameUsingDestructuring(person) {}
 //     { firstName: 'Wyll', lastName: 'Ravengard', location: "Baldur's Gate" },
 //     { firstName: 'Astarion', lastName: 'Ancunin', location: "Baldur's Gate" }
 //   ];
-function getPeopleByLocation(people, location) {}
+function getPeopleByLocation(people, location) {
+  let peopleInLocation = []
+
+  people.forEach((person) => {
+    if (person.location === location) {
+      peopleInLocation.push(person)
+    }
+  })
+  return peopleInLocation
+}
 
 // Translate a phrase to pirate talk.
 //
@@ -72,7 +87,25 @@ const EN_PIRATE_LOOKUP = {
   hello: 'ahoy',
 };
 
-function translateToPirateTalk(phrase) {}
+function translateToPirateTalk(phrase) {
+  const {excuse, sir, is, restroom, student, friend, resturant, your, are, my, hotel, hello} = EN_PIRATE_LOOKUP
+
+  // pretty repetetive, might come back and try to make this more efficient
+  phrase = phrase.replaceAll('excuse', excuse)
+  phrase = phrase.replaceAll('sir', sir)
+  phrase = phrase.replaceAll('is', is)
+  phrase = phrase.replaceAll('restroom', restroom)
+  phrase = phrase.replaceAll('student', student)
+  phrase = phrase.replaceAll('friend', friend)
+  phrase = phrase.replaceAll('resturant', resturant)
+  phrase = phrase.replaceAll('your', your)
+  phrase = phrase.replaceAll('are', are)
+  phrase =  phrase.replaceAll('my', my)
+  phrase = phrase.replaceAll('hotel', hotel)
+  phrase = phrase.replaceAll('hello', hello)
+
+  return phrase
+}
 
 // Return the number of occurrences of each word in a string.
 // This function doesn't handle punctuation and is case-sensitive, so you can
@@ -81,7 +114,20 @@ function translateToPirateTalk(phrase) {}
 // Ex.:
 //   wordCount('hello world')
 //   => { hello: 1, world: 1 }
-function wordCount(str) {}
+function wordCount(str) {
+  const words = str.split(' ')
+  let wordsCounted = {}
+
+  // set each word's initial count to 0, otherwise will return a 'NaN' when trying to increment word's count
+  for (let word of words) {
+    wordsCounted[word] = 0
+  }
+  // increment word count
+  for (let word of words) {
+    wordsCounted[word] += 1
+  }
+  return wordsCounted
+}
 
 // Given an object representing a bug, return true if the given bug is
 // available in the given month.
@@ -103,7 +149,11 @@ function wordCount(str) {}
 //     }
 //   }, 1);
 //   => true
-function isBugAvailable(bug, month) {}
+function isBugAvailable(bug, month) {
+  const {name, availability} = bug
+
+  return availability.months.includes(month)
+}
 
 // Given an array of objects representing bugs, return an object that'll be
 // used to build a calendar. The keys of the object should be the months of the
@@ -146,7 +196,21 @@ function isBugAvailable(bug, month) {}
 //     12: [],
 //   }
 
-function buildBugHuntCalendar(bugs) {}
+
+// ############################## COME BACK TO THIS #############################
+function buildBugHuntCalendar(bugs) {
+  let calendar = {}
+  
+  for (let i = 1; i <= 12; i++) { // maybe try using array methods (other than the ones you already tried) instead of a for-loop?
+    calendar[i] = []
+
+    if (bugs[1].availability.months.includes(i)) { // b[i]lavailability doesn't work with a variable, b[1].availability works just fine
+      calendar[i] = bugs[1].name
+    }
+  }
+
+  return calendar
+}
 
 export {
   buildBugHuntCalendar,

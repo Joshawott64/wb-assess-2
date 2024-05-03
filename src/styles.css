@@ -1,0 +1,25 @@
+table {
+    margin-top: 50px;
+    border: 1px solid white;
+}
+
+th {
+    padding: 5px;
+    border: 1px solid white;
+}
+
+td {
+    padding: 5px;
+    border: 1px solid white;
+}
+
+body {
+    background-color: black;
+}
+
+div {
+    color: white;
+    font-family: sans-serif;
+    margin-top: 15px;
+    margin-bottom: 15px
+}

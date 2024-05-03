@@ -8,7 +8,15 @@
 // update and say "Log out". If a user clicks on the button again, its text
 // should switch from "Log Out" to "Log In".
 
-/// TODO: replace this with your code
+const logButton = document.querySelector('#auth')
+
+logButton.addEventListener('click', () => {
+    if (logButton.innerText === 'Log in') {
+        logButton.innerText = 'Log out'
+    } else {
+        logButton.innerText = 'Log in'
+    }
+})
 
 // Send an alert
 //
@@ -17,7 +25,16 @@
 // A user should be able to enter what they want the alert to say in the
 // text box. Then, they can submit the form to trigger the alert.
 
-/// TODO: replace this with your code
+
+const submitButton = document.querySelector('#send-alert button')
+
+submitButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    
+    const alertMessage = document.querySelector('#alert-message').value
+    alert(alertMessage)
+})
+
 
 // Add an item
 //
@@ -34,7 +51,13 @@
 //     <li>Item</li>  <!-- This was added after double-clicking -->
 //   </ol>
 
-/// TODO: replace this with your code
+document.querySelector('#item-adder').addEventListener('dblclick', () => {
+    const list = document.querySelector('#list')
+    const item = document.createElement('li')
+
+    item.innerText = "Item"
+    list.appendChild(item)
+})
 
 // Change colors
 //
@@ -45,7 +68,17 @@
 // Clicking on "Turn Stuff Red" should make text red and clicking on "Turn
 // Stuff Blue" should make text blue.
 
-/// TODO: replace this with your code
+const blueBtn = document.querySelector('#blue')
+const redBtn = document.querySelector('#red')
+const changesColor = document.querySelectorAll('#color-changer .changes-colors')
+
+blueBtn.addEventListener('click', () => {
+  changesColor.forEach((item) => item.style.color = 'blue')
+})
+
+redBtn.addEventListener('click', () => {
+  changesColor.forEach((item) => item.style.color = 'red')
+})
 
 // Calculate factorial
 //
@@ -62,7 +95,20 @@
 //   - calls your function that calculates a factorial
 //   - puts the result of the function inside the "result" span
 
-/// TODO: replace this with your code
+
+const calculateFactorial = (evt) => {
+    evt.preventDefault()
+    let factorialInput = document.querySelector('#factorial-input').value
+
+    for (let i = factorialInput - 1; i > 0; i--) {
+        factorialInput *= i
+    }
+    document.querySelector('#result').innerText = factorialInput
+}
+
+const submitBtn = document.querySelector('#factorial-calculator button')
+submitBtn.addEventListener('click', calculateFactorial)
+
 
 // Validate a form
 //
@@ -79,4 +125,18 @@
 // the feedback text to say "The word must be at least 4 characters long." and
 // change the color of the text to red..
 
-/// TODO: replace this with your code
+const word = document.querySelector('#recommend-word')
+const userWord = document.querySelector('#word')
+const feedback = document.querySelector('.form-feedback')
+
+word.addEventListener('submit', (evt) => {
+    evt.preventDefault()
+
+    if (userWord.value.length < 3) {
+        feedback.style.color = 'red'
+        feedback.innerText = 'The word must be at least 4 characters long.'
+    } else {
+        feedback.style.color = 'green'
+        feedback.innerText = 'Thanks for your submission!'
+    }
+})
