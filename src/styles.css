@@ -18,8 +18,11 @@ body {
 }
 
 div {
-    color: white;
-    font-family: sans-serif;
     margin-top: 15px;
     margin-bottom: 15px
+}
+
+html {
+    color: white;
+    font-family: sans-serif;
 }
