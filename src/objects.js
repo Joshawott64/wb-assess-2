@@ -150,7 +150,7 @@ function wordCount(str) {
 //   }, 1);
 //   => true
 function isBugAvailable(bug, month) {
-  const {name, availability} = bug
+  const {name, availability} = bug // descructure bug object
 
   return availability.months.includes(month)
 }
@@ -197,18 +197,28 @@ function isBugAvailable(bug, month) {
 //   }
 
 
-// ############################## COME BACK TO THIS #############################
 function buildBugHuntCalendar(bugs) {
-  let calendar = {}
-  
-  for (let i = 1; i <= 12; i++) { // maybe try using array methods (other than the ones you already tried) instead of a for-loop?
-    calendar[i] = []
-
-    if (bugs[1].availability.months.includes(i)) { // b[i]lavailability doesn't work with a variable, b[1].availability works just fine
-      calendar[i] = bugs[1].name
-    }
+  let calendar = { // calendar objects with empty arrays corresponding to each month key
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+    7: [],
+    8: [],
+    9: [],
+    10: [],
+    11: [],
+    12: []
   }
-
+  bugs.forEach((bug) => { // loop through every bug in bugs[] array
+    for (let month = 1; month <= 12; month++) { // loop through each month for each bug in bugs[] array
+      if (bug.availability.months.includes(month)) { // validate if bug includes the current month
+        calendar[month].push(bug.name) // push bug.name to empty arrays in calendar object
+      }
+    }
+  })
   return calendar
 }
 
